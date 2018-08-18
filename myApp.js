@@ -14,6 +14,7 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://rbdm:Armstro9@ds125362.mlab.com:25362/rbdb');
 
+
 /** # SCHEMAS and MODELS #
 /*  ====================== */
 
@@ -38,8 +39,15 @@ mongoose.connect('mongodb://rbdm:Armstro9@ds125362.mlab.com:25362/rbdb');
 // `default` values. See the [mongoose docs](http://mongoosejs.com/docs/guide.html).
 
 // <Your code here >
+var Schema = mongoose.Schema;
 
-var Person /* = <Your Model> */
+var personSchema = new Schema({
+  name: String,
+  age: Number,
+  favoriteFoods: [String]
+});
+  
+var Person = mongoose.model('Person', personSchema);
 
 // **Note**: GoMix is a real server, and in real servers interactions with
 // the db are placed in handler functions, to be called when some event happens
