@@ -41,12 +41,17 @@ mongoose.connect('mongodb://rbdm:Armstro9@ds125362.mlab.com:25362/rbdb');
 // <Your code here >
 var Schema = mongoose.Schema;
 
+// schema
 var personSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   age: Number,
   favoriteFoods: [String]
 });
-  
+
+//constructor
 var Person = mongoose.model('Person', personSchema);
 
 // **Note**: GoMix is a real server, and in real servers interactions with
@@ -78,16 +83,26 @@ var Person = mongoose.model('Person', personSchema);
 // This is a common pattern, all the **CRUD** methods take a callback 
 // function like this as the last argument.
 
+//var Person = mongoose.model('Person', personSchema);
+
+
 // - Example -
 // ...
 // person.save(function(err, data) {
 //    ...do your stuff here...
 // });
 
-var createAndSavePerson = function(done) {
-  
-  done(null /*, data*/);
+/* var dhika = new Person({name: 'Dhika', age: 22, favoriteFoods: ['apple', 'chicken', 'chocolate']});
+console.log(dhika.name);
+console.log(dhika.age);
+console.log(dhika.favoriteFoods); */
 
+var createAndSavePerson = function(done) {
+  var dhika = new Person({name: 'Dhika', age: 22, favoriteFoods: ['apple', 'chicken', 'chocolate']});
+  dhika.save((err, data) => {
+    if (err) return done(err);
+    return /* console.log(done); */ done(null, data);
+  });
 };
 
 /** 4) Create many People with `Model.create()` */
@@ -100,9 +115,14 @@ var createAndSavePerson = function(done) {
 // 'arrayOfPeople'.
 
 var createManyPeople = function(arrayOfPeople, done) {
-    
-    done(null/*, data*/);
-    
+    /* var arrayOfPeople = [
+      {name: 'mirhady', age: 25, favoriteFoods: ['rendang', 'blueberry']},
+      {name: 'anjani', age: 22, favoriteFoods: ['apple juice', 'chicken zombies', 'chocolate fountain']}
+    ]; */
+    Person.create(arrayOfPeople, (err, data) => {
+      if (err) return done(err);
+      return done(null, data);
+    });
 };
 
 /** # C[R]UD part II - READ #
