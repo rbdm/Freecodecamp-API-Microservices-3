@@ -139,7 +139,7 @@ var createManyPeople = function(arrayOfPeople, done) {
 var findPeopleByName = function(personName, done) {
   Person.find({name: personName}, (err, data) => {
     if (err) return done(err);
-    return /*console.log(data);*/ done(null, data);
+    return /* console.log(data); */ done(null, data);
   });
 };
 
@@ -169,9 +169,10 @@ var findOneByFood = function(food, done) {
 // Use the function argument 'personId' as search key.
 
 var findPersonById = function(personId, done) {
-  
-  done(null/*, data*/);
-  
+  Person.findById({_id: personId}, (err, data) => {
+    if (err) return done(err);
+    return /* console.log(data) */ done(null, data);
+  });
 };
 
 /** # CR[U]D part III - UPDATE # 
