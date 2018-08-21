@@ -120,8 +120,8 @@ var createManyPeople = function(arrayOfPeople, done) {
       {name: 'anjani', age: 22, favoriteFoods: ['apple juice', 'chicken zombies', 'chocolate fountain']}
     ]; */
     Person.create(arrayOfPeople, (err, data) => {
-      if (err) return done(err);
-      return done(null, data);
+      (err) ?
+      done(err) : done(null, data);
     });
 };
 
@@ -138,8 +138,8 @@ var createManyPeople = function(arrayOfPeople, done) {
 
 var findPeopleByName = function(personName, done) {
   Person.find({name: personName}, (err, data) => {
-    if (err) return done(err);
-    return /* console.log(data); */ done(null, data);
+    (err) ? 
+    done(err) : /* console.log(data); */ done(null, data);
   });
 };
 
@@ -154,8 +154,8 @@ var findPeopleByName = function(personName, done) {
 
 var findOneByFood = function(food, done) {
   Person.findOne({favoriteFoods: food}, (err, data) => {
-    if (err) return done(err);
-    return /* console.log(data) */ done(null, data);
+    (err) ?
+    done(err) : /* console.log(data) */ done(null, data);
   });
 };
 
@@ -170,8 +170,8 @@ var findOneByFood = function(food, done) {
 
 var findPersonById = function(personId, done) {
   Person.findById({_id: personId}, (err, data) => {
-    if (err) return done(err);
-    return /* console.log(data) */ done(null, data);
+    (err) ?
+    done(err) : /* console.log(data) */ done(null, data);
   });
 };
 
@@ -202,8 +202,8 @@ var findPersonById = function(personId, done) {
 
 var findEditThenSave = function(personId, done) {
   var foodToAdd = 'hamburger';
-  
-  done(null/*, data*/);
+    
+  done(null /*, data*/);
 };
 
 /** 9) New Update : Use `findOneAndUpdate()` */
