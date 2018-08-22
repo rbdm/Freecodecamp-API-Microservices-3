@@ -202,8 +202,11 @@ var findPersonById = function(personId, done) {
 
 var findEditThenSave = function(personId, done) {
   var foodToAdd = 'hamburger';
-    
-  done(null /*, data*/);
+    Person.update({_id: personId}, (err, data) => {
+      (err) ?
+      done(err) : Person.favoriteFoods.push(foodToAdd);
+    done(null, data);
+    });
 };
 
 /** 9) New Update : Use `findOneAndUpdate()` */
