@@ -200,13 +200,24 @@ var findPersonById = function(personId, done) {
 // manually mark it as edited using `document.markModified('edited-field')`
 // (http://mongoosejs.com/docs/schematypes.html - #Mixed )
 
+/*var createAndSavePerson = function(done) {
+  var dhika = new Person({name: 'Dhika', age: 22, favoriteFoods: ['apple', 'chicken', 'chocolate']});
+  dhika.save((err, data) => {
+    if (err) return done(err);
+    return done(null, data);
+  });
+};*/
+
 var findEditThenSave = function(personId, done) {
   var foodToAdd = 'hamburger';
-    Person.update({_id: personId}, (err, data) => {
+  Person.findById({_id: personId}, (err, data) => { //find
+    data.favoriteFoods.push(foodToAdd); //edit
+    (err) ?
+    done(err) : data.save((err, data) => { //save
       (err) ?
-      done(err) : Person.favoriteFoods.push(foodToAdd);
-    done(null, data);
+      done(err) : /* console.log(data)*/ done(null, data);  
     });
+  });
 };
 
 /** 9) New Update : Use `findOneAndUpdate()` */
