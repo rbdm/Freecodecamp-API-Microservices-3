@@ -101,8 +101,8 @@ var createAndSavePerson = function(done) {
   var dhika = new Person({name: 'Dhika', age: 22, favoriteFoods: ['apple', 'chicken', 'chocolate']});
   dhika.save((err, data) => {
     if (err) return done(err);
-    return /* console.log(done); */ done(null, data);
-  });
+    return /* console.log(done); */ done(null, data)
+  })
 };
 
 /** 4) Create many People with `Model.create()` */
@@ -121,8 +121,8 @@ var createManyPeople = function(arrayOfPeople, done) {
     ]; */
     Person.create(arrayOfPeople, (err, data) => {
       (err) ?
-      done(err) : done(null, data);
-    });
+      done(err) : done(null, data)
+    })
 };
 
 /** # C[R]UD part II - READ #
@@ -139,8 +139,8 @@ var createManyPeople = function(arrayOfPeople, done) {
 var findPeopleByName = function(personName, done) {
   Person.find({name: personName}, (err, data) => {
     (err) ? 
-    done(err) : /* console.log(data); */ done(null, data);
-  });
+    done(err) : /* console.log(data); */ done(null, data)
+  })
 };
 
 /** 6) Use `Model.findOne()` */
@@ -155,8 +155,8 @@ var findPeopleByName = function(personName, done) {
 var findOneByFood = function(food, done) {
   Person.findOne({favoriteFoods: food}, (err, data) => {
     (err) ?
-    done(err) : /* console.log(data) */ done(null, data);
-  });
+    done(err) : /* console.log(data) */ done(null, data)
+  })
 };
 
 /** 7) Use `Model.findById()` */
@@ -171,8 +171,8 @@ var findOneByFood = function(food, done) {
 var findPersonById = function(personId, done) {
   Person.findById({_id: personId}, (err, data) => {
     (err) ?
-    done(err) : /* console.log(data) */ done(null, data);
-  });
+    done(err) : /* console.log(data) */ done(null, data)
+  })
 };
 
 /** # CR[U]D part III - UPDATE # 
@@ -200,14 +200,6 @@ var findPersonById = function(personId, done) {
 // manually mark it as edited using `document.markModified('edited-field')`
 // (http://mongoosejs.com/docs/schematypes.html - #Mixed )
 
-/*var createAndSavePerson = function(done) {
-  var dhika = new Person({name: 'Dhika', age: 22, favoriteFoods: ['apple', 'chicken', 'chocolate']});
-  dhika.save((err, data) => {
-    if (err) return done(err);
-    return done(null, data);
-  });
-};*/
-
 var findEditThenSave = function(personId, done) {
   var foodToAdd = 'hamburger';
   Person.findById({_id: personId}, (err, data) => { //find
@@ -215,10 +207,10 @@ var findEditThenSave = function(personId, done) {
     (err) ?
     done(err) : data.save((err, data) => { //save
       (err) ?
-      done(err) : /* console.log(data)*/ done(null, data);  
-    });
-  });
-};
+      done(err) : /* console.log(data)*/ done(null, data)
+    })
+  })
+}
 
 /** 9) New Update : Use `findOneAndUpdate()` */
 
@@ -237,8 +229,11 @@ var findEditThenSave = function(personId, done) {
 
 var findAndUpdate = function(personName, done) {
   var ageToSet = 20;
-
-  done(null/*, data*/);
+  //Person.findOne({name: personName}, (err, data) => {
+  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, {new: true}, (err, data) => {
+    (err) ?
+    done(err) : /* console.log(data) */ done(null, data)
+  })
 };
 
 /** # CRU[D] part IV - DELETE #
@@ -252,9 +247,11 @@ var findAndUpdate = function(personName, done) {
 // As usual, use the function argument `personId` as search key.
 
 var removeById = function(personId, done) {
-  
-  done(null/*, data*/);
-    
+  //Person.findById({_id: personId}, (err, data) => {
+  Person.findByIdAndRemove({_id: personId}, (err, data) => {
+    (err) ?
+    done(err) : /* console.log(data) */ done(null, data)
+  })
 };
 
 /** 11) Delete many People */
@@ -269,10 +266,12 @@ var removeById = function(personId, done) {
 
 var removeManyPeople = function(done) {
   var nameToRemove = "Mary";
-
-  done(null/*, data*/);
+  //Person.find({name: nameToRemove}, (err, data) => {
+  Person.remove({name: nameToRemove}, (err, data) => {  
+    (err) ?
+    done(err) : done(null, data)
+  })
 };
-
 /** # C[R]UD part V -  More about Queries # 
 /*  ======================================= */
 
